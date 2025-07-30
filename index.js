@@ -5,7 +5,7 @@ const { todo } = require('./db')
  const port = 3000
 const cors = require('cors')
 app.use(cors())
-let id = 1
+let id = 0
  let newtodo = generateRandomTodo()
 let todos=[]
  app.use(express.json())
