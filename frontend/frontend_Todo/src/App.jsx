@@ -2,33 +2,46 @@ import { useEffect } from "react"
 import { useState } from "react"
 import axios from  "axios"
 function  App(){
-        const [todo ,setTodo] = useState([])
-        useEffect(()=>{
+        // const [todo ,setTodo] = useState([])
+        // useEffect(()=>{
          
           
-           axios.get('http://localhost:3000/random-todo')
-           .then(function(res){
-            console.log(res.data);
+        //    axios.get('http://localhost:3000/random-todo')
+        //    .then(function(res){
+        //     console.log(res.data);
             
-            setTodo(res.data)
-           })
+        //     setTodo(res.data)
+        //    })
 
-        },[])
-  return (
-    <>
-       {todo.map(function(item){
-             return   <Todo  title={item.title} description={item.description} />
-       })}
-    </>
-  )
-}
+        // },[])
+//   return (
+//     <>
+//        {todo.map(function(item){
+//              return   <Todo  title={item.title} description={item.description} />
+//        })}
+//     </>
+//   ) 
+                  return   <div>
+                      <Todo id={5}/>
+                    </div>
+                    
+                  
+                   
+ }
 
-function Todo({title,description}){
+function Todo({id}){
+              const [todo,setTodo] = useState({})
+              useEffect(()=>{
+                axios.get("http://localhost:3000/todo?id="+ id)
+                .then(res=>{
+                  setTodo(res.data.result)
+                })
+              },[])
         return(
           <div>
-                 <h1>{title}</h1>
+                 <h1>{todo.title}</h1>
                  <br />
-                 <h2>{description}</h2>
+                 <h2>{todo.description}</h2>
           </div>
         )
 }
